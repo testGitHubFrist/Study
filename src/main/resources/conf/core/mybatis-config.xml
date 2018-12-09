@@ -55,12 +55,12 @@
 		<!--引入Mapper.xml-->
 		<property name="mapperLocations" value="classpath:conf/mybatis/*.xml"/>
 		<!--别名-->
-		<property name="typeAliasesPackage" value="com.elong.study.model"/>
+		<property name="typeAliasesPackage" value="com.zsc.study.model"/>
 
 	</bean>
 	<!-- 配置mybatis mapper接口 -->
 	<bean class="org.mybatis.spring.mapper.MapperScannerConfigurer">
-		<property name="basePackage" value="com.elong.study.persist.mapper"/>
+		<property name="basePackage" value="com.zsc.study.persist.mapper"/>
 		<property name="sqlSessionFactoryBeanName" value="sqlSessionFactory"/>
 	</bean>
 
