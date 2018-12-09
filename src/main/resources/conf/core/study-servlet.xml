@@ -1,0 +1,65 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xmlns:context="http://www.springframework.org/schema/context"
+       xmlns:mvc="http://www.springframework.org/schema/mvc"
+       xmlns:aop="http://www.springframework.org/schema/aop"
+       xmlns:tx="http://www.springframework.org/schema/tx"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-3.0.xsd
+		   http://www.springframework.org/schema/mvc http://www.springframework.org/schema/mvc/spring-mvc-3.0.xsd
+           http://www.springframework.org/schema/aop http://www.springframework.org/schema/aop/spring-aop-3.0.xsd
+           http://www.springframework.org/schema/tx http://www.springframework.org/schema/tx/spring-tx-3.0.xsd
+           http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context-3.0.xsd
+           ">
+    <!--springmvc的配置-->
+    <!-- DispatcherServlet 类的初始化方法initStrategies
+        初始化MutipartResolver：上传文件的配置
+        this.initMultipartResolver(context);
+
+        初始化LocaleResolver 在Spring的国际化配置中一共3种使用方式
+        this.initLocaleResolver(context);
+
+        初始化ThemeResolver
+        this.initThemeResolver(context);
+        HandlerMapping负责映射用户的url和对应的处理类
+        this.initHandlerMappings(context);
+        this.initHandlerAdapters(context);
+        全局异常
+        this.initHandlerExceptionResolvers(context);
+        获取视图的名称
+        this.initRequestToViewNameTranslator(context);
+        视图解析器
+        this.initViewResolvers(context);
+        重定向相关
+        this.initFlashMapManager(context);
+
+    -->
+    <!--initMultipartResolver 文件上传配置-->
+    <bean id="multipartResolver" class="org.springframework.web.multipart.commons.CommonsMultipartResolver">
+        <property name="maxUploadSize">
+            <value>5242880</value>
+        </property>
+    </bean>
+
+    <!--initLocaleResolver国际化-->
+    <bean id="localeResolver" class="org.springframework.web.servlet.i18n.AcceptHeaderLocaleResolver"/>
+
+    <!--initHandlerExceptionResolvers 全局异常捕获-->
+    <bean class="com.zsc.study.util.GlobalExceptionResolver"/>
+
+    <!-- 配置jsp 显示ViewResolver -->
+    <bean class="org.springframework.web.servlet.view.InternalResourceViewResolver">
+        <property name="viewClass" value="org.springframework.web.servlet.view.JstlView"/>
+        <property name="prefix" value="/WEB-INF/views/"/>
+        <property name="suffix" value=".jsp"/>
+    </bean>
+
+    <!--集成Swageer生成api文档-->
+    <mvc:resources mapping="swagger-ui.html" location="classpath:/META-INF/resources/" />
+    <mvc:resources
+            mapping="/webjars/**"
+            location="classpath:/META-INF/resources/webjars/" />
+    <bean class="com.zsc.study.config.ApiSwaggerConfig"/>
+
+</beans>
