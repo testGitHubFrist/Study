@@ -18,7 +18,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 /**
  * @Auther: zhangshanchuang
  * @Date: 18/12/8 21:44
- * @Description:
+ * @description:
  */
 @Controller
 @Api(value = "用户权限接口")

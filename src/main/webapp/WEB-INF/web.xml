@@ -11,6 +11,8 @@ http://java.sun.com/xml/ns/javaee/web-app_2_5.xsd">
         <welcome-file>index.jsp</welcome-file>
     </welcome-file-list>
 
+    <!--web.xml加载顺序 Listener,filter,servlet-->
+
     <!--spring上下文的加载-->
     <context-param>
         <param-name>contextConfigLocation</param-name>

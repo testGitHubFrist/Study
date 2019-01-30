@@ -18,6 +18,7 @@
         <maven.compiler.target>1.8</maven.compiler.target>
         <spring.version>4.2.0.RELEASE</spring.version>
         <mybatis.version>3.3.0</mybatis.version>
+        <sharding-jdbc.version>2.0.1</sharding-jdbc.version>
     </properties>
 
     <dependencies>
@@ -205,6 +206,12 @@
             <artifactId>jackson-core</artifactId>
             <version>2.4.0</version>
         </dependency>
+        
+        <dependency>
+		  <groupId>io.shardingjdbc</groupId>
+		  <artifactId>sharding-jdbc-core</artifactId>
+		  <version>${sharding-jdbc.version}</version>
+		</dependency>
     </dependencies>
 
     <build>

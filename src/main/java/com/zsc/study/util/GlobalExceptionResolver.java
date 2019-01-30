@@ -15,8 +15,10 @@ public class GlobalExceptionResolver implements HandlerExceptionResolver {
 
     @Override
     public ModelAndView resolveException(HttpServletRequest request, HttpServletResponse response, Object handler, Exception ex) {
-        ex.getCause();
-        //TODO 待处理
+
+        //TODO
         return null;
     }
+
+
 }
