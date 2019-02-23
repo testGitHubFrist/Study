@@ -33,7 +33,7 @@ public class ProducerTest1 {
 
         //新建一个properties对象
         Properties properties = new Properties();
-        properties.put("bootstrap.servers", "localhost:9092");
+        properties.put("bootstrap.servers", "192.168.1.129:9092,192.168.1.129:9093");
         properties.put("client.id", "KafkaProducer");
         properties.put("key.serializer", "org.apache.kafka.common.serialization.StringSerializer");
         properties.put("value.serializer", "org.apache.kafka.common.serialization.StringSerializer");
@@ -41,11 +41,11 @@ public class ProducerTest1 {
         KafkaProducer kafkaProducer = new KafkaProducer<String, String>(properties);
         String topic = "producer";
         //设置生产者发送消息
-        ProducerRecord<String, String> producerRecord = new ProducerRecord<>(topic, "hallo word");
+        ProducerRecord<String, String> producerRecord = new ProducerRecord<>(topic, "test");
         try {
             Future<RecordMetadata> future =  kafkaProducer.send(producerRecord);
             RecordMetadata recordMetadata = future.get();
-            System.out.println(JSONObject.toJSON(recordMetadata));
+            System.out.println("test:"+JSONObject.toJSON(recordMetadata));
         } catch (Exception e) {
             System.out.println("exception："+e.getMessage());
         }

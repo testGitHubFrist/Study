@@ -28,7 +28,7 @@ public class ConsumerTest1 {
         properties.put("key.deserializer", "org.apache.kafka.common.serialization.StringDeserializer");
         properties.put("value.deserializer", "org.apache.kafka.common.serialization.StringDeserializer");
         KafkaConsumer<String, String> kafkaConsumer = new KafkaConsumer(properties);
-        String topic = "producer";
+        String topic = "producer1";
         //订阅主题
         kafkaConsumer.subscribe(Collections.singleton(topic));
         //轮询消息
