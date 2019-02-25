@@ -138,7 +138,7 @@
             <artifactId>log4j</artifactId>
             <version>1.2.17</version>
         </dependency>
-       
+
         <!--J2EE-->
         <dependency>
             <groupId>javax.servlet</groupId>
@@ -212,7 +212,19 @@
             <artifactId>kafka_2.11</artifactId>
             <version>0.10.1.0</version>
         </dependency>
+        <!-- https://mvnrepository.com/artifact/org.apache.zookeeper/zookeeper -->
+        <dependency>
+            <groupId>org.apache.zookeeper</groupId>
+            <artifactId>zookeeper</artifactId>
+            <version>3.4.0</version>
+            <type>pom</type>
+        </dependency>
 
+        <dependency>
+            <groupId>org.apache.curator</groupId>
+            <artifactId>curator-recipes</artifactId>
+            <version>2.7.0</version>
+        </dependency>
     </dependencies>
 
     <build>

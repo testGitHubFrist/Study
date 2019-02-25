@@ -7,6 +7,7 @@ import org.apache.kafka.clients.producer.ProducerRecord;
 import org.apache.kafka.clients.producer.RecordMetadata;
 
 import java.util.Properties;
+import java.util.UUID;
 import java.util.concurrent.Future;
 
 /**
@@ -40,15 +41,17 @@ public class ProducerTest1 {
         //创建生产者
         KafkaProducer kafkaProducer = new KafkaProducer<String, String>(properties);
         String topic = "producer";
-        //设置生产者发送消息
-        ProducerRecord<String, String> producerRecord = new ProducerRecord<>(topic, "hallo word");
-        try {
-            Future<RecordMetadata> future =  kafkaProducer.send(producerRecord);
-            RecordMetadata recordMetadata = future.get();
-            System.out.println(JSONObject.toJSON(recordMetadata));
-        } catch (Exception e) {
-            System.out.println("exception："+e.getMessage());
+        for (int i=0;i<100;i++){
+            //设置生产者发送消息
+            ProducerRecord<String, String> producerRecord = new ProducerRecord<>(topic, UUID.randomUUID().toString());
+            try {
+                Future<RecordMetadata> future =  kafkaProducer.send(producerRecord);
+                System.out.println("生产者消息次数");
+            } catch (Exception e) {
+
+            }
         }
+
 
     }
 }
