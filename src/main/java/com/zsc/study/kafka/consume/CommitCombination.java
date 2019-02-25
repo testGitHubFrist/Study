@@ -8,28 +8,23 @@ import java.util.Collections;
 import java.util.Properties;
 
 /**
- * @Auther: zhangshanchuang
- * @Date: 19/2/16 19:15
- * @Description: kafka消费者测试1
- * 消费消息
- * ./kafka-console-consumer.sh  --zookeeper 192.168.1.128:2181  --topic producer --from-beginning
- * <p>
- * 查看主题
- * ./kafka-topics.sh --list --zookeeper 192.168.1.128:2181 --topic producer
- * 查看所有topic
- * ./kafka-topics.sh --list --zookeeper 192.168.1.128:2181
+ * Created by work on 2019/2/23.
+ * 组合提交偏移量
  */
-public class ConsumerTest1 {
+public class CommitCombination {
 
     public static void main(String[] args) {
+
+        //配置文件
         Properties properties = new Properties();
         properties.put("bootstrap.servers", "192.168.1.129:9092,192.168.1.129:9093");
         properties.put("group.id", "KafkaConsumer");
         properties.put("key.deserializer", "org.apache.kafka.common.serialization.StringDeserializer");
         properties.put("value.deserializer", "org.apache.kafka.common.serialization.StringDeserializer");
-        KafkaConsumer<String, String> kafkaConsumer = new KafkaConsumer(properties);
-        String topic = "producer1";
+        //创建kafka消费者
+        KafkaConsumer<String, String> kafkaConsumer = new KafkaConsumer<String, String>(properties);
         //订阅主题
+        String topic = "producer";
         kafkaConsumer.subscribe(Collections.singleton(topic));
         //轮询消息
         try {
@@ -44,11 +39,14 @@ public class ConsumerTest1 {
                             + "偏移量：" + consumerRecord.offset() + "\n"
                     );
                 }
+                //异步提交
+                kafkaConsumer.commitAsync();
             }
         } catch (Exception e) {
 
         } finally {
-            kafkaConsumer.close();
+            //重试机制提交偏移量
+            kafkaConsumer.commitSync();
         }
     }
 }
