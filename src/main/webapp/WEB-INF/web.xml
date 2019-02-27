@@ -104,6 +104,9 @@ http://java.sun.com/xml/ns/javaee/web-app_2_5.xsd">
     </servlet-mapping>
 
     <!--服务注册zk-->
+    <listener>
+        <listener-class>com.zsc.study.listener.HostRegisterListener</listener-class>
+    </listener>
     <!--机器监控-->
     <!--网络ping-->
     <!--定时任务监听-->
