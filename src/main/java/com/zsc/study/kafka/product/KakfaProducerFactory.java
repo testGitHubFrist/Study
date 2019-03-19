@@ -6,6 +6,7 @@ import com.zsc.study.kafka.EnumKafkaTopic;
 import org.apache.kafka.clients.producer.KafkaProducer;
 import org.apache.kafka.clients.producer.ProducerRecord;
 
+import java.util.List;
 import java.util.Properties;
 import java.util.concurrent.Callable;
 import java.util.concurrent.ExecutorService;
@@ -31,7 +32,7 @@ public class KakfaProducerFactory {
         KafkaProducerConfig kafkaProducerConfig = ConfigUtils.getConfig(KafkaProducerConfig.class);
         //新建一个properties对象
         Properties properties = new Properties();
-        properties.put("bootstrap.servers", "192.168.1.129:9092,192.168.1.129:9093");
+        properties.put("bootstrap.servers", "localhost:9092");
         properties.put("client.id", "KafkaProducer");
         properties.put("key.serializer", "org.apache.kafka.common.serialization.StringSerializer");
         properties.put("value.serializer", "org.apache.kafka.common.serialization.StringSerializer");
@@ -71,10 +72,31 @@ public class KakfaProducerFactory {
         threadPool.submit(new Callable<Integer>() {
             @Override
             public Integer call() throws Exception {
-                kafkaProducer.send(new ProducerRecord<String, String>(enumKafkaTopic.getTopic(), JSON.toJSONString(message)));
+                kafkaProducer.send(new ProducerRecord<String, String>(enumKafkaTopic.getTopic(), message));
                 return 1;
             }
         });
+    }
+
+
+    /**
+     * 功能描述: 异步发送消息
+     *
+     * @param:
+     * @return:
+     * @auther: zhangshanchuang
+     * @date: 19/2/27 下午3:35
+     */
+    public void sendbatch(final List<String> messages, final EnumKafkaTopic enumKafkaTopic) {
+        for (String s:messages) {
+            threadPool.submit(new Callable<Integer>() {
+                @Override
+                public Integer call() throws Exception {
+                    kafkaProducer.send(new ProducerRecord<String, String>(enumKafkaTopic.getTopic(), s));
+                    return 1;
+                }
+            });
+        }
     }
 
 }

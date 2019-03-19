@@ -1,7 +1,8 @@
 package com.zsc.study.kafka;
 
 public enum EnumKafkaTopic {
-    test_topic("test","测试主题");
+    test_topic("test","测试主题"),
+    supplier_data_topic("sucess","测试主题");
 
 
     private String topic;
