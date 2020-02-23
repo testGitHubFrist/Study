@@ -23,4 +23,12 @@
 
     <!--获取spring容器-->
     <bean id="springContextHolder" class="com.zsc.study.util.SpringContextHolder"/>
+
+    <!--hystrix 加载配置-->
+    <bean id="hystrixConfig" class="com.zsc.study.config.HystrixInitConfiguration"></bean>
+    <!--hystrix注解-->
+    <aop:aspectj-autoproxy/>
+    <bean id="hystrixAspect" class="com.netflix.hystrix.contrib.javanica.aop.aspectj.HystrixCommandAspect"></bean>
+
+
 </beans>

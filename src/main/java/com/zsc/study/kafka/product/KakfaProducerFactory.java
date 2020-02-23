@@ -88,15 +88,15 @@ public class KakfaProducerFactory {
      * @date: 19/2/27 下午3:35
      */
     public void sendbatch(final List<String> messages, final EnumKafkaTopic enumKafkaTopic) {
-        for (String s:messages) {
-            threadPool.submit(new Callable<Integer>() {
-                @Override
-                public Integer call() throws Exception {
-                    kafkaProducer.send(new ProducerRecord<String, String>(enumKafkaTopic.getTopic(), s));
-                    return 1;
-                }
-            });
-        }
+//        for (String s:messages) {
+//            threadPool.submit(new Callable<Integer>() {
+//                @Override
+//                public Integer call() throws Exception {
+//                    kafkaProducer.send(new ProducerRecord<String, String>(enumKafkaTopic.getTopic(), s));
+//                    return 1;
+//                }
+//            });
+//        }
     }
 
 }
